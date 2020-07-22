@@ -232,10 +232,10 @@ subscription_prompt() {
 get_proxy() {
   if [ ! -f "/usr/local/bin/tls-shunt-proxy" ]; then
     colorEcho ${BLUE} "tls-shunt-proxy is not installed. start installation"
-    curl -sL https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh | ${sudoCmd} bash
+    curl -sL https://raw.githubusercontent.com/1309654031/tls-shunt-proxy/master/dist/install.sh | ${sudoCmd} bash
     colorEcho ${GREEN} "tls-shunt-proxy is installed."
   else
-    local API_URL="https://api.github.com/repos/liberal-boy/tls-shunt-proxy/releases/latest"
+    local API_URL="https://api.github.com/repos/1309654031/tls-shunt-proxy/releases/latest"
     local DOWNLOAD_URL="$(curl "${PROXY}" -H "Accept: application/json" -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0" -s "${API_URL}" --connect-timeout 10| grep 'browser_download_url' | cut -d\" -f4)"
     ${sudoCmd} curl -L -H "Cache-Control: no-cache" -o "/tmp/tls-shunt-proxy.zip" "${DOWNLOAD_URL}"
     ${sudoCmd} unzip -o -d /usr/local/bin/ "/tmp/tls-shunt-proxy.zip"
