@@ -175,7 +175,7 @@ install_caddy()
 	rm -rf -- "$dl"
 
 	if type -p curl >/dev/null 2>&1; then
-		curl -fsSL "$caddy_url" -u "$CADDY_ACCOUNT_ID:$CADDY_API_KEY" -o "$dl"
+		curl -fsSL "https://github.com/mholt/caddy/releases/download/v0.11.0/caddy_v0.11.0_linux_amd64.tar.gz" -u "$CADDY_ACCOUNT_ID:$CADDY_API_KEY" -o "$dl"
 		((gpg)) && curl -fsSL "$caddy_asc" -u "$CADDY_ACCOUNT_ID:$CADDY_API_KEY" -o "$dl.asc"
 	elif type -p wget >/dev/null 2>&1; then
 		wget --quiet --header "Authorization: Basic $(echo -ne "$CADDY_ACCOUNT_ID:$CADDY_API_KEY" | base64)" "$caddy_url" -O "$dl"
